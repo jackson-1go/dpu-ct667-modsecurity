@@ -1,0 +1,65 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ct519_final_app
+    restart: unless-stopped
+    ports:
+      - "2041:80"
+    volumes:
+      - ./storage:/var/www/html/storage
+      - ./bootstrap/cache:/var/www/html/bootstrap/cache
+      - ./resources:/var/www/html/resources
+      - ./app:/var/www/html/app
+      - ./routes:/var/www/html/routes
+      - ./config:/var/www/html/config
+      - ./public:/var/www/html/public
+      - ./database:/var/www/html/database
+    # depends_on:
+    #   - ct519_final_db
+    networks:
+      - ct519_final
+
+  # ct519_final_db:
+  #   image: mariadb:10.5
+  #   container_name: ct519_final_db
+  #   restart: unless-stopped
+  #   environment:
+  #     MYSQL_DATABASE: ct519_final
+  #     MYSQL_ROOT_PASSWORD: dev101
+  #     MYSQL_PASSWORD: P@ssw0rd
+  #     MYSQL_USER: dev
+  #     TZ: Asia/Bangkok
+  #     MARIADB_AUTO_UPGRADE: "true"
+  #     MARIADB_DISABLE_UPGRADE_BACKUP: "true"
+  #   volumes:
+  #     - mysql_data:/var/lib/mysql
+  #   ports:
+  #     - "3340:3306"
+  #   networks:
+  #     - ct519_final
+
+  # ct519_final_admin:
+  #   image: phpmyadmin:latest
+  #   container_name: ct519_final_admin
+  #   platform: linux/x86_64
+  #   restart: always
+  #   environment:
+  #       PMA_HOST: ct519_final_db
+  #       PMA_PORT: 3306
+  #       UPLOAD_LIMIT: 3000M
+  #   ports:
+  #     - "2040:80"
+  #   depends_on:
+  #     - ct519_final_db
+  #   networks:
+  #     - ct519_final
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  ct519_final:
+    driver: bridge
