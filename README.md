@@ -1,4 +1,4 @@
-# mod_security v2
+# mod_security
 จงสร้างระบบที่มีสถาปัตยกรรม ตามรูป โดยใช้ OWASP/modsecurity-crs และ Web server หลังบ้าน  (เว็บที่ นศ แต่ละท่านมีอยู่)   ทั้งนี้แนบไฟล์ตัวอย่างมาให้ดังนี้
 
 |-- Example-Project
